@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="search-container">
+        <!-- Ajoutez un id "search-form" au formulaire -->
+        <form id="search-form">
+            <!-- Ajoutez un id "search-input" à l'input -->
+            <input type="text" id="search-input" name="city" placeholder="Entrez le nom de la ville..." required>
+            <button type="submit">Rechercher</button>
+        </form>
+    </div>
+    
+    
+    
+    <img id="bg-image" src="{% static 'images/background1.jpg' %}" alt="Background">
+
+
+    <div class='div'>
+        <div class="switch">
+            <input type="checkbox" id="tempSwitch">
+            <label for="tempSwitch">
+                <span class="slider"></span>
+                <span class="text">°C</span>
+                <span class="text right">°F</span>
+            </label>
+        </div>
+
+        <h1 class="temperature">{{ weather_data.temperature }}°C</h1>
+    <p class="location">{{ weather_data.city }}</p>
+        
+        
+        
+    </div>
+
+    <script>
+        document.getElementById("tempSwitch").addEventListener("change", function() {
+            let tempValue = document.querySelector(".temperature");
+            let currentTemp = parseFloat(tempValue.textContent); // Récupère la température actuelle et la convertit en float
+    
+            if (this.checked) {  // Si le bouton est sur F
+                let fahrenheit = currentTemp * 9/5 + 32;
+                tempValue.textContent = fahrenheit.toFixed(1) + "°F"; // Fixe le nombre de décimales à 1
+            } else {  // Si le bouton est sur C
+                let celsius = (currentTemp - 32) * 5/9;
+                tempValue.textContent = celsius.toFixed(1) + "°C"; // Fixe le nombre de décimales à 1
+            }
+        });
+
+
+
+        document.getElementById("search-form").addEventListener("submit", function(event) {
+            event.preventDefault();  // Empêcher le formulaire de soumettre normalement
+        
+            let city = document.getElementById("search-input").value;
+            fetch(`/api/weather/?city=${city}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector(".temperature").textContent = `${data.temperature}°`;
+                    document.querySelector(".location").textContent = data.city;
+                })
+                .catch(error => {
+                    console.error("Erreur lors de la récupération des données météo :", error);
+                });
+        });
+        
+    </script>
+
+
+
+    <footer>
+        <p>&copy; 2023 Yann Djamel Compaoré . Tous droits réservés.</p>
+    </footer>
+    
+    
+</body>
+</html>

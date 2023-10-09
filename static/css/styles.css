@@ -1,0 +1,178 @@
+/* Réinitialisation générale */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+   
+
+
+    /*background-color: yellow;*/
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* pour prévenir tout défilement */
+    display: flex; /* Activer flexbox */
+    justify-content: center; /* Centrer le contenu horizontalement */
+    align-items: center; /* Centrer le contenu verticalement */
+}
+
+.div {
+    background-color: white;
+    padding: 20px; /* Espace intérieur fixe autour du contenu */
+    border-radius: 25px;
+    font-size: 3em;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.switch {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centre le contenu horizontalement */
+}
+
+input[type="checkbox"] {
+    display: none; /* Masquer la case à cocher */
+}
+
+label {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 34px;
+    cursor: pointer;
+}
+
+.slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background-color: #f1f1f1;
+    transition: 0.4s;
+    border-radius: 25px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 60px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 25px;
+}
+
+.text {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s;
+    pointer-events: none; /* empêche les interactions avec le texte */
+    font-size: 15px;
+}
+
+.text.right {
+    left: 50%;
+}
+
+input[type="checkbox"]:checked + label .slider:before {
+    transform: translateX(60px);
+}
+
+.temperature {
+    margin: auto;
+    font-size: 85px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.location {
+    font-size: 25px;  /* Ajustez cette valeur selon vos préférences */
+    font-family: 'Arial', sans-serif; 
+}
+
+
+#bg-image {
+    position: fixed;  /* Positionnement fixe */
+    top: 0;
+    left: 0;
+    width: 100vw;     /* Couvre toute la largeur de la fenêtre */
+    height: 100vh;    /* Couvre toute la hauteur de la fenêtre */
+    z-index: -1;      /* Met l'image en arrière-plan */
+    object-fit: cover; /* Assure que l'image couvre toute la zone sans être déformée */
+}
+
+
+
+
+
+.search-container {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.search-container form {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 25px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-container input {
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    border-radius: 15px 0 0 15px;
+}
+
+.search-container button {
+    padding: 5px 15px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 60px;
+}
+
+.search-container button:hover {
+    background-color: #0056b3;
+    
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
+    color: white; /* Texte en blanc */
+    text-align: center; /* Centrer le texte */
+    padding: 10px 0; /* Espacement vertical */
+    font-size: 14px; /* Taille du texte */
+    z-index: 100; /* Pour s'assurer qu'il apparaisse au-dessus d'autres éléments */
+}
+
